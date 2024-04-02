@@ -174,17 +174,15 @@ public static class RecursionTester {
     /// </summary>
     public static void PermutationsChoose(string letters, int size, string word = "") {
         // TODO Start Problem 2
+        
         if (word.Length == size) {
             Console.WriteLine(word);
             return;
         }
 
-        for (int i = 0; i < letters.Length; i++) {
-            permutation[index] = letters[i];
-            used[i] = true;
-            PermutationsChoose(letters, word, index + 1, used);
-            used[i] = false;
-        }
+        for (int i = 0; i < size; i++) {
+            word += letters[i];
+            PermutationsChoose(letters, i + 1, word);
         }
     }
 
@@ -243,7 +241,8 @@ public static class RecursionTester {
             return 2;
         if (s == 3)
             return 4;
-        else if (remember.ContainsKey(s))
+        else if (remember is not null)
+
             return remember[s];
 
         // Solve using recursion
@@ -266,17 +265,21 @@ public static class RecursionTester {
     /// </summary>
     public static void WildcardBinary(string pattern) {
         // TODO Start Problem 4
-        if (!pattern.Include("*")) {
-        return pattern;
+        string star = "*";
+        if (!(pattern.Contains(star))) {
+        Console.WriteLine(pattern);
+        return;
         }
         string pattern0 = pattern;
-        int ind = pattern0.IndexOf("*");
-        pattern0[ind] = "0";
+        int ind = pattern0.IndexOf(star);
+        pattern0 = pattern0.Remove(ind, 1);
+        pattern0 = pattern0.Insert(ind, "0");
         WildcardBinary(pattern0);
 
         string pattern1 = pattern;
-        int ind1 = pattern1.IndexOf("*");
-        pattern1[ind1] = "1";
+        int ind1 = pattern1.IndexOf(star);
+        pattern1 = pattern1.Remove(ind1, 1);
+        pattern1 = pattern1.Insert(ind1, "1");
         WildcardBinary(pattern1);
 
     }
@@ -291,6 +294,8 @@ public static class RecursionTester {
         if (currPath == null)
             currPath = new List<ValueTuple<int, int>>();
 
+        // current position is x, y
+        // check if (x+1), y equals '1', if yes increment x up one y stays the same else check if x, (y+1) equals '1'
         // currPath.Add((1,2)); // Use this syntax to add to the current path
 
         // TODO Start Problem 5
