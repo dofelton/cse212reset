@@ -146,7 +146,8 @@ public static class RecursionTester {
     /// n &lt;= 0, just return 0.   A loop should not be used.
     /// </summary>
     public static int SumSquaresRecursive(int n) {
-        // TODO Start Problem 1
+        // TODO Start Problem 1.
+        
         return 0;
     }
 
