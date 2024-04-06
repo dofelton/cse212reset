@@ -8,46 +8,60 @@ public class Node {
     }
 
     public void Insert(int value) {
-        if (value < Data) {
+        if (value < Data)
+        {
             // Insert to the left
             if (Left is null)
+            {
                 Left = new Node(value);
-            else
-                if (Left != value)
-                    Left.Insert(value);
+            }
+            else 
+            {
+                Left.Insert(value);
+            }
         }
-        else {
+        else if (value > Data)
+        {
             // Insert to the right
             if (Right is null)
+            {
                 Right = new Node(value);
+            }
             else
-                if (Right != value)
-                    Right.Insert(value);
+            {
+                Right.Insert(value);
+            }
         }
     }
 
     public bool Contains(int value) {
         // TODO Start Problem 2
-        if (value == Data) {
+        if (Data == value) {
             return true;
         }
-        else {
-            if (Left.Contains(value))
-                return true;
-            else if (Right.Contains(value))
-                return true;
-            else 
+        else if (value < Data)
+        {
+            if (Left == null)
                 return false;
+            else
+                return Left.Contains(value);
+        }
+        else 
+        {
+            if (Right == null)
+                return false;
+            else 
+                return Right.Contains(value);
         }
     }
 
     public int GetHeight() {
         // TODO Start Problem 4
-        if (Data == null)
+        if (this == null)
             return 0;
         
-        int leftHeight = GetHeight(Node.Left);
-        int rightHeight = GetHeight(Node.Right);
+        int leftHeight = (Left == null) ? 0 : Left.GetHeight();
+        int rightHeight = (Right == null) ? 0 : Right.GetHeight();
         
         return 1 + Math.Max(leftHeight, rightHeight); // Replace this line with the correct return statement(s)
     }
